@@ -15,12 +15,12 @@ public class Kunde {
     }
 
     // Sucht alle verfügbaren Scooter
-    public List<EScooter> ScooterSuchen() {
+    public List<EScooter> scooterSuchen() {
         return EScooterRegistry.getAllAvailable();
     }
 
     // Suche nach Position, Radius (km) und Mindest-Ladestand (%)
-    public List<EScooter> ScooterSuchen(Position zentrum, float maxDistanzKm, float minLadestandProzent) {
+    public List<EScooter> scooterSuchen(Position zentrum, float maxDistanzKm, float minLadestandProzent) {
         List<EScooter> alle = EScooterRegistry.getAllAvailable();
         List<EScooter> result = new ArrayList<>();
 

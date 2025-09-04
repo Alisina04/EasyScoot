@@ -8,12 +8,12 @@ public class ServiceMitarbeiter extends Mitarbeiter {
     }
 
     // Gibt alle Scooter zurück
-    public List<EScooter> AlleScooterSuchen() {
-        return new ArrayList<>(EScooterRegistry.getAll());
+    public List<EScooter> alleScooterSuchen() {
+        return EScooterRegistry.getAll();
     }
 
     // Startet eine Wartung für einen Scooter
-    public void WartungStarten(int scooterID) {
+    public void wartungStarten(int scooterID) {
         EScooter scooter = EScooterRegistry.findById(scooterID);
         if (scooter != null) {
             scooter.startWartung();
@@ -21,7 +21,7 @@ public class ServiceMitarbeiter extends Mitarbeiter {
     }
 
     // Beendet eine laufende Wartung
-    public void WartungBeenden(int scooterID) {
+    public void wartungBeenden(int scooterID) {
         EScooter scooter = EScooterRegistry.findById(scooterID);
         if (scooter != null) {
             scooter.beendeWartung();
@@ -29,17 +29,17 @@ public class ServiceMitarbeiter extends Mitarbeiter {
     }
 
     // Fügt einen neuen Scooter hinzu
-    public void ScooterHinzufuegen(EScooter scooter) {
+    public void scooterHinzufuegen(EScooter scooter) {
         EScooterRegistry.add(scooter);
     }
 
     // Entfernt einen Scooter über seine ID
-    public void ScooterEntfernen(int scooterID) {
+    public void scooterEntfernen(int scooterID) {
         EScooterRegistry.removeById(scooterID);
     }
 
     // Zeigt Scooter mit einem Ladestand unter oder gleich 50%
-    public List<EScooter> KritischeScooterAnzeigen() {
+    public List<EScooter> kritischeScooterAnzeigen() {
         List<EScooter> result = new ArrayList<>();
         for (EScooter s : EScooterRegistry.getAll()) {
             Float ladestand = s.getLadestand();

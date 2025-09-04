@@ -16,7 +16,7 @@ public class Main {
                 "Modell B", 500f, 20f, Fahrstatus.STEHEND, Leihstatus.VERFUEGBAR, Wartungsstatus.KEINE_WARTUNG);
 
         // Ersten Scooter über den Service hinzufügen, zweiten direkt
-        service.ScooterHinzufuegen(scooter1);
+        service.scooterHinzufuegen(scooter1);
         EScooterRegistry.add(scooter2);
 
         // Kurze Wartung direkt am Objekt durchführen
@@ -26,20 +26,20 @@ public class Main {
 
         // Alle Scooter anzeigen
         System.out.println("Alle Scooter: " + EScooterRegistry.getAll().size());
-        List<EScooter> alleVomService = service.AlleScooterSuchen();
+        List<EScooter> alleVomService = service.alleScooterSuchen();
         System.out.println("Alle Scooter laut Service: " + alleVomService.size());
 
         // Kunde sucht verfügbare Scooter (einfache Suche)
         Kunde kunde = new Kunde("Meier", "Hans", "hans@example.com", dummy);
-        List<EScooter> verfuegbar = kunde.ScooterSuchen();
+        List<EScooter> verfuegbar = kunde.scooterSuchen();
         System.out.println("Verfügbare Scooter: " + verfuegbar.size());
 
         // Kunde sucht mit Position, Radius und Mindestladestand
-        List<EScooter> nah = kunde.ScooterSuchen(new Position(52.51f, 13.41f), 5f, 30f);
+        List<EScooter> nah = kunde.scooterSuchen(new Position(52.51f, 13.41f), 5f, 30f);
         System.out.println("Scooter in der Nähe: " + nah.size());
 
         // Scooter mit wenig Akku anzeigen
-        List<EScooter> kritisch = service.KritischeScooterAnzeigen();
+        List<EScooter> kritisch = service.kritischeScooterAnzeigen();
         System.out.println("Scooter mit <=50% Akku: " + kritisch.size());
 
         // Entfernung zwischen den beiden Scootern
@@ -47,14 +47,14 @@ public class Main {
         System.out.println("Abstand Scooter1 zu Scooter2: " + dist);
 
         // Wartung über Service starten und beenden
-        service.WartungStarten(2);
+        service.wartungStarten(2);
         EScooter wartungsScooter = EScooterRegistry.findById(2);
         System.out.println("Scooter2 verfügbar nach Start? " + wartungsScooter.istVerfuegbar());
-        service.WartungBeenden(2);
+        service.wartungBeenden(2);
         System.out.println("Scooter2 verfügbar nach Ende? " + wartungsScooter.istVerfuegbar());
 
         // Einen Scooter entfernen
-        service.ScooterEntfernen(1);
+        service.scooterEntfernen(1);
 
         // Manager zeigt restliche Scooter
         List<EScooter> rest = manager.alleScooterAnzeigen();

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -8,6 +9,8 @@ import java.util.List;
 public final class EScooterRegistry {
 
     // Hier liegen alle Scooter drin
+
+  
     private static final List<EScooter> SCOOTERS = new ArrayList<>();
 
     private EScooterRegistry() {
@@ -15,7 +18,6 @@ public final class EScooterRegistry {
     }
 
     /**
-     * Fügt einen Scooter zur Liste hinzu.
      * Falls die ID schon existiert, wird der alte Scooter gelöscht.
      */
     public static void add(EScooter scooter) {
@@ -25,6 +27,7 @@ public final class EScooterRegistry {
                 break;
             }
         }
+
         SCOOTERS.add(scooter);
     }
 

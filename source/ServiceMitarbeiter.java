@@ -7,6 +7,7 @@ public class ServiceMitarbeiter extends Mitarbeiter {
         super(id, name, vorname, email, anschrift);
     }
 
+
     // Gibt alle Scooter zurück
     public List<EScooter> alleScooterSuchen() {
         return EScooterRegistry.getAll();

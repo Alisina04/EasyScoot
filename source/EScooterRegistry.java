@@ -1,15 +1,16 @@
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * Zentrale Verwaltung aller E-Scooter im System.
- * Die Registry ist als einfache In-Memory-Liste umgesetzt und stellt
- * Hilfsmethoden zum Hinzufügen, Entfernen und Abfragen bereit.
+ * Eine sehr einfache zentrale Liste für alle Scooter.
+ * Hier wird nichts mit Datenbanken gemacht, sondern nur mit einer Liste.
  */
 public final class EScooterRegistry {
 
+    // Hier liegen alle Scooter drin
+
+  
     private static final List<EScooter> SCOOTERS = new ArrayList<>();
 
     private EScooterRegistry() {
@@ -17,35 +18,49 @@ public final class EScooterRegistry {
     }
 
     /**
-     * Fügt einen Scooter zur Registry hinzu. Existiert bereits ein Scooter
-     * mit derselben ID, wird dieser zuvor entfernt.
+     * Falls die ID schon existiert, wird der alte Scooter gelöscht.
      */
     public static void add(EScooter scooter) {
-        SCOOTERS.removeIf(s -> s.getId() == scooter.getId());
+        for (int i = 0; i < SCOOTERS.size(); i++) {
+            if (SCOOTERS.get(i).getId() == scooter.getId()) {
+                SCOOTERS.remove(i);
+                break;
+            }
+        }
+
         SCOOTERS.add(scooter);
     }
 
     /**
-     * Entfernt einen Scooter anhand seiner ID.
+     * Entfernt einen Scooter über seine ID.
      */
     public static void removeById(int id) {
-        SCOOTERS.removeIf(s -> s.getId() == id);
+        for (int i = 0; i < SCOOTERS.size(); i++) {
+            if (SCOOTERS.get(i).getId() == id) {
+                SCOOTERS.remove(i);
+                break;
+            }
+        }
     }
 
     /**
-     * Liefert eine unveränderliche Liste aller Scooter.
+     * Gibt eine neue Liste mit allen Scootern zurück.
      */
     public static List<EScooter> getAll() {
-        return Collections.unmodifiableList(SCOOTERS);
+        return new ArrayList<>(SCOOTERS);
     }
 
     /**
-     * Gibt alle Scooter zurück, die aktuell verliehbar sind.
+     * Sucht alle Scooter, die gerade ausgeliehen werden können.
      */
     public static List<EScooter> getAllAvailable() {
-        return SCOOTERS.stream()
-                .filter(EScooter::istVerfuegbar)
-                .collect(Collectors.toList());
+        List<EScooter> result = new ArrayList<>();
+        for (EScooter s : SCOOTERS) {
+            if (s.istVerfuegbar()) {
+                result.add(s);
+            }
+        }
+        return result;
     }
 
     /**

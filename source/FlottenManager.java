@@ -10,6 +10,7 @@ public class FlottenManager extends Mitarbeiter {
         super(id, name, vorname, email, anschrift);
     }
 
+    // Gibt alle registrierten Scooter zurück
     public List<EScooter> alleScooterAnzeigen() {
         return EScooterRegistry.getAll();
     }

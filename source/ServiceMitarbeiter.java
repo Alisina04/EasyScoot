@@ -2,50 +2,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceMitarbeiter extends Mitarbeiter {
-    // Einfache In-Memory-Registry aller Scooter
-    private static final List<EScooter> REGISTRY = new ArrayList<>();
 
     public ServiceMitarbeiter(String id, String name, String vorname, String email, Anschrift anschrift) {
         super(id, name, vorname, email, anschrift);
     }
 
+    // Gibt alle Scooter zurück
     public List<EScooter> AlleScooterSuchen() {
-        return new ArrayList<>(REGISTRY);
+        return new ArrayList<>(EScooterRegistry.getAll());
     }
 
+    // Startet eine Wartung für einen Scooter
     public void WartungStarten(int scooterID) {
-        for (EScooter s : REGISTRY) {
-            if (s.getId() == scooterID) {
-                s.startWartung();
-                return;
-            }
+        EScooter scooter = EScooterRegistry.findById(scooterID);
+        if (scooter != null) {
+            scooter.startWartung();
         }
     }
 
+    // Beendet eine laufende Wartung
     public void WartungBeenden(int scooterID) {
-        for (EScooter s : REGISTRY) {
-            if (s.getId() == scooterID) {
-                s.beendeWartung();
-                return;
-            }
+        EScooter scooter = EScooterRegistry.findById(scooterID);
+        if (scooter != null) {
+            scooter.beendeWartung();
         }
     }
 
+    // Fügt einen neuen Scooter hinzu
     public void ScooterHinzufuegen(EScooter scooter) {
-        // Falls bereits vorhanden (gleiche ID), zuerst entfernen, dann hinzufügen
-        REGISTRY.removeIf(s -> s.getId() == scooter.getId());
-        REGISTRY.add(scooter);
+        EScooterRegistry.add(scooter);
     }
 
+    // Entfernt einen Scooter über seine ID
     public void ScooterEntfernen(int scooterID) {
-        REGISTRY.removeIf(s -> s.getId() == scooterID);
+        EScooterRegistry.removeById(scooterID);
     }
 
+    // Zeigt Scooter mit einem Ladestand unter oder gleich 50%
     public List<EScooter> KritischeScooterAnzeigen() {
-        // Minimal: alles, was aktuell nicht verfügbar ist, als "kritisch" anzeigen
         List<EScooter> result = new ArrayList<>();
-        for (EScooter s : REGISTRY) {
-            if (!s.istVerfuegbar()) {
+        for (EScooter s : EScooterRegistry.getAll()) {
+            Float ladestand = s.getLadestand();
+            if (ladestand != null && ladestand <= 50f) {
                 result.add(s);
             }
         }

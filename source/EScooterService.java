@@ -3,7 +3,6 @@ public final class EScooterService {
     private EScooterService() {
         // Utility-Klasse
     }
-
     /**
      * Prüft, ob der Scooter ausgeliehen werden darf.
      */
@@ -11,7 +10,6 @@ public final class EScooterService {
         return scooter.getLeihstatus() == Leihstatus.VERFUEGBAR
                 && scooter.getWartungsstatus() == Wartungsstatus.KEINE_WARTUNG;
     }
-
     /**
      * Berechnet die Entfernung in Kilometern zu einem anderen Punkt.
      */
@@ -29,7 +27,6 @@ public final class EScooterService {
             scooter.setLeihstatus(Leihstatus.BLOCKIERT);
         }
     }
-
     /**
      * Beendet den Wartungsmodus.
      */

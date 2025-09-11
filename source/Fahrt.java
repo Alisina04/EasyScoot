@@ -22,14 +22,12 @@ Float preis) {
         this.verbrauch = verbrauch;
         this.preis = preis;
     }
-
     /**
      * Gibt den Kunden zurück.
      */
     public Kunde getKunde() {
         return kunde;
     }
-
     /**
      * Gibt den benutzten Scooter zurück.
      */
@@ -43,14 +41,12 @@ Float preis) {
     public LocalDateTime getStartZiel() {
         return startZiel;
     }
-
     /**
      * Gibt den Endzeitpunkt zurück.
      */
     public LocalDateTime getEndZiel() {
         return endZiel;
     }
-
     /**
      * Setzt den Endzeitpunkt.
      */
@@ -71,15 +67,12 @@ Float preis) {
     public void setStrecke(Float strecke) {
         this.strecke = strecke;
     }
-
     /**
      * Gibt den Verbrauch in Wh zurück.
      */
     public Float getVerbrauch() {
         return verbrauch;
     }
-
-    /**
      * Setzt den Verbrauch in Wh.
      */
     public void setVerbrauch(Float verbrauch) {
@@ -92,7 +85,6 @@ Float preis) {
     public Float getPreis() {
         return preis;
     }
-
     /**
      * Setzt den Preis in Euro.
      */

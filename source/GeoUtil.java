@@ -3,7 +3,6 @@ public final class GeoUtil {
     private GeoUtil() {
         // Utility-Klasse
     }
-
     /**
      * Berechnet die Entfernung zwischen zwei Punkten auf der Erde.
      */

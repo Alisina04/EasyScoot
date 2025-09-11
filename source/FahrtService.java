@@ -20,8 +20,6 @@ public final class FahrtService {
         scooter.setLeihstatus(Leihstatus.VERLIEHEN);
         scooter.setFahrstatus(Fahrstatus.IN_BETRIEB);
         return new Fahrt(kunde, scooter, LocalDateTime.now(), null, null, null, null);
-    }
-
     /**
      * Beendet eine laufende Fahrt.
      */

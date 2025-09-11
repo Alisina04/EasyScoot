@@ -31,32 +31,6 @@ public class EScooter {
         this.wartungsstatus = wartungsstatus;
     }
 
-    // Business-Methoden
-    public boolean istVerfuegbar() {
-        return leihstatus == Leihstatus.VERFUEGBAR && wartungsstatus == Wartungsstatus.KEINE_WARTUNG;
-    }
-
-    public double entfernungKmZu(Position other) {
-        if (this.position == null) return Double.POSITIVE_INFINITY;
-        return this.position.distanceKm(other);
-    }
-
-    public void startWartung() {
-        this.wartungsstatus = Wartungsstatus.IN_WARTUNG;
-        // Optional: Scooter kann während Wartung nicht verliehen werden
-        if (this.leihstatus == Leihstatus.VERFUEGBAR) {
-            this.leihstatus = Leihstatus.BLOCKIERT;
-        }
-    }
-
-    public void beendeWartung() {
-        this.wartungsstatus = Wartungsstatus.KEINE_WARTUNG;
-        if (this.leihstatus == Leihstatus.BLOCKIERT) {
-            this.leihstatus = Leihstatus.VERFUEGBAR;
-        }
-    }
-
-    // Getter/Setter
     public Wartungsstatus getWartungsstatus() {
         return wartungsstatus;
     }

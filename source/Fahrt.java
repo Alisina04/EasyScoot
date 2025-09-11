@@ -19,4 +19,47 @@ public class Fahrt {
         this.preis = preis;
     }
 
+    public Kunde getKunde() {
+        return kunde;
+    }
+
+    public EScooter getScooter() {
+        return scooter;
+    }
+
+    public LocalDateTime getStartZiel() {
+        return startZiel;
+    }
+
+    public LocalDateTime getEndZiel() {
+        return endZiel;
+    }
+
+    public void setEndZiel(LocalDateTime endZiel) {
+        this.endZiel = endZiel;
+    }
+
+    public Float getStrecke() {
+        return strecke;
+    }
+
+    public void setStrecke(Float strecke) {
+        this.strecke = strecke;
+    }
+
+    public Float getVerbrauch() {
+        return verbrauch;
+    }
+
+    public void setVerbrauch(Float verbrauch) {
+        this.verbrauch = verbrauch;
+    }
+
+    public Float getPreis() {
+        return preis;
+    }
+
+    public void setPreis(Float preis) {
+        this.preis = preis;
+    }
 }

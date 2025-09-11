@@ -56,7 +56,7 @@ public final class EScooterRegistry {
     public static List<EScooter> getAllAvailable() {
         List<EScooter> result = new ArrayList<>();
         for (EScooter s : SCOOTERS) {
-            if (s.istVerfuegbar()) {
+            if (EScooterService.istVerfuegbar(s)) {
                 result.add(s);
             }
         }

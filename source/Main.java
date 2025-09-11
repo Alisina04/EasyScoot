@@ -1,6 +1,5 @@
 import java.util.List;
 
-
 public class Main {
     public static void main(String[] args) {
         // Eine Beispiel-Adresse
@@ -20,10 +19,10 @@ public class Main {
         service.scooterHinzufuegen(scooter1);
         EScooterRegistry.add(scooter2);
 
-        // Kurze Wartung direkt am Objekt durchführen
-        scooter1.startWartung();
-        System.out.println("Scooter1 verfügbar in Wartung? " + scooter1.istVerfuegbar());
-        scooter1.beendeWartung();
+        // Kurze Wartung über Service durchführen
+        EScooterService.startWartung(scooter1);
+        System.out.println("Scooter1 verfügbar in Wartung? " + EScooterService.istVerfuegbar(scooter1));
+        EScooterService.beendeWartung(scooter1);
 
         // Alle Scooter anzeigen
         System.out.println("Alle Scooter: " + EScooterRegistry.getAll().size());
@@ -32,11 +31,11 @@ public class Main {
 
         // Kunde sucht verfügbare Scooter (einfache Suche)
         Kunde kunde = new Kunde("Meier", "Hans", "hans@example.com", dummy);
-        List<EScooter> verfuegbar = kunde.scooterSuchen();
+        List<EScooter> verfuegbar = KundenService.scooterSuchen();
         System.out.println("Verfügbare Scooter: " + verfuegbar.size());
 
         // Kunde sucht mit Position, Radius und Mindestladestand
-        List<EScooter> nah = kunde.scooterSuchen(new Position(52.51f, 13.41f), 5f, 30f);
+        List<EScooter> nah = KundenService.scooterSuchen(new Position(52.51f, 13.41f), 5f, 30f);
         System.out.println("Scooter in der Nähe: " + nah.size());
 
         // Scooter mit wenig Akku anzeigen
@@ -44,15 +43,28 @@ public class Main {
         System.out.println("Scooter mit <=50% Akku: " + kritisch.size());
 
         // Entfernung zwischen den beiden Scootern
-        double dist = scooter1.entfernungKmZu(scooter2.getPosition());
+        double dist = EScooterService.entfernungKmZu(scooter1, scooter2.getPosition());
         System.out.println("Abstand Scooter1 zu Scooter2: " + dist);
 
         // Wartung über Service starten und beenden
         service.wartungStarten(2);
         EScooter wartungsScooter = EScooterRegistry.findById(2);
-        System.out.println("Scooter2 verfügbar nach Start? " + wartungsScooter.istVerfuegbar());
+        System.out.println("Scooter2 verfügbar nach Start? " + EScooterService.istVerfuegbar(wartungsScooter));
         service.wartungBeenden(2);
-        System.out.println("Scooter2 verfügbar nach Ende? " + wartungsScooter.istVerfuegbar());
+        System.out.println("Scooter2 verfügbar nach Ende? " + EScooterService.istVerfuegbar(wartungsScooter));
+
+        // Fahrtsimulation
+        Fahrt fahrt = FahrtService.startFahrt(kunde, 2);
+        if (fahrt != null) {
+            System.out.println("Fahrt gestartet mit Scooter2");
+            FahrtService.beendeFahrt(fahrt, 2.0f, 4.0f);
+            System.out.println("Fahrt beendet. Ladestand Scooter2: " + fahrt.getScooter().getLadestand());
+        }
+
+        // Kunde darf keinen reservierten Scooter buchen
+        scooter1.setLeihstatus(Leihstatus.RESERVIERT);
+        Fahrt reserviert = FahrtService.startFahrt(kunde, 1);
+        System.out.println("Fahrt mit reserviertem Scooter möglich? " + (reserviert != null));
 
         // Einen Scooter entfernen
         service.scooterEntfernen(1);

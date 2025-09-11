@@ -17,7 +17,7 @@ public class ServiceMitarbeiter extends Mitarbeiter {
     public void wartungStarten(int scooterID) {
         EScooter scooter = EScooterRegistry.findById(scooterID);
         if (scooter != null) {
-            scooter.startWartung();
+            EScooterService.startWartung(scooter);
         }
     }
 
@@ -25,7 +25,7 @@ public class ServiceMitarbeiter extends Mitarbeiter {
     public void wartungBeenden(int scooterID) {
         EScooter scooter = EScooterRegistry.findById(scooterID);
         if (scooter != null) {
-            scooter.beendeWartung();
+            EScooterService.beendeWartung(scooter);
         }
     }
 

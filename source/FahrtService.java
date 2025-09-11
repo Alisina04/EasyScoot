@@ -6,6 +6,9 @@ public final class FahrtService {
         // Utility-Klasse
     }
 
+    /**
+     * Startet eine neue Fahrt, wenn der Scooter frei ist.
+     */
     public static Fahrt startFahrt(Kunde kunde, int scooterId) {
         EScooter scooter = EScooterRegistry.findById(scooterId);
         if (scooter == null) {
@@ -17,8 +20,9 @@ public final class FahrtService {
         scooter.setLeihstatus(Leihstatus.VERLIEHEN);
         scooter.setFahrstatus(Fahrstatus.IN_BETRIEB);
         return new Fahrt(kunde, scooter, LocalDateTime.now(), null, null, null, null);
-    }
-
+    /**
+     * Beendet eine laufende Fahrt.
+     */
     public static void beendeFahrt(Fahrt fahrt, float streckeKm, float preis) {
         if (fahrt == null) return;
         fahrt.setEndZiel(LocalDateTime.now());

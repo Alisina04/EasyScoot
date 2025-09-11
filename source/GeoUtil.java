@@ -3,7 +3,9 @@ public final class GeoUtil {
     private GeoUtil() {
         // Utility-Klasse
     }
-
+    /**
+     * Berechnet die Entfernung zwischen zwei Punkten auf der Erde.
+     */
     public static double distanceKm(Position p1, Position p2) {
         if (p1 == null || p2 == null) return Double.POSITIVE_INFINITY;
         final double R = 6371.0088; // Erdradius in km (mittlerer)

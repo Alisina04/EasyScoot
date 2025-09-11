@@ -7,10 +7,16 @@ public final class KundenService {
         // Utility-Klasse
     }
 
+    /**
+     * Gibt alle verfügbaren Scooter zurück.
+     */
     public static List<EScooter> scooterSuchen() {
         return EScooterRegistry.getAllAvailable();
     }
 
+    /**
+     * Sucht Scooter nach Position, Radius und Mindestladung.
+     */
     public static List<EScooter> scooterSuchen(Position zentrum, float maxDistanzKm, float minLadestandProzent) {
         List<EScooter> alle = EScooterRegistry.getAllAvailable();
         List<EScooter> result = new ArrayList<>();

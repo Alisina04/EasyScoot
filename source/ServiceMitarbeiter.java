@@ -7,39 +7,50 @@ public class ServiceMitarbeiter extends Mitarbeiter {
         super(id, name, vorname, email, anschrift);
     }
 
-
-    // Gibt alle Scooter zurück
+    /**
+     * Gibt alle Scooter zurück.
+     */
     public List<EScooter> alleScooterSuchen() {
         return EScooterRegistry.getAll();
     }
 
-    // Startet eine Wartung für einen Scooter
+    /**
+     * Startet eine Wartung für einen Scooter.
+     */
     public void wartungStarten(int scooterID) {
         EScooter scooter = EScooterRegistry.findById(scooterID);
         if (scooter != null) {
-            scooter.startWartung();
+            EScooterService.startWartung(scooter);
         }
     }
 
-    // Beendet eine laufende Wartung
+    /**
+     * Beendet eine laufende Wartung.
+     */
     public void wartungBeenden(int scooterID) {
         EScooter scooter = EScooterRegistry.findById(scooterID);
         if (scooter != null) {
-            scooter.beendeWartung();
+            EScooterService.beendeWartung(scooter);
         }
     }
 
-    // Fügt einen neuen Scooter hinzu
+    /**
+     * Fügt einen neuen Scooter hinzu.
+     */
     public void scooterHinzufuegen(EScooter scooter) {
         EScooterRegistry.add(scooter);
     }
 
-    // Entfernt einen Scooter über seine ID
+    /**
+     * Entfernt einen Scooter über seine ID.
+     */
     public void scooterEntfernen(int scooterID) {
         EScooterRegistry.removeById(scooterID);
     }
 
-    // Zeigt Scooter mit einem Ladestand unter oder gleich 50%
+    /**
+     * Zeigt Scooter mit einem Ladestand unter oder gleich 50%.
+     */
     public List<EScooter> kritischeScooterAnzeigen() {
         List<EScooter> result = new ArrayList<>();
         for (EScooter s : EScooterRegistry.getAll()) {

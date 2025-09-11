@@ -1,8 +1,7 @@
 import java.util.List;
 
 /**
- * Der Flottenmanager hat hauptsächlich Überblick über die gesamte Flotte.
- * Er kann sich alle registrierten Scooter anzeigen lassen.
+ * Der Flottenmanager hat Überblick über die gesamte Flotte.
  */
 public class FlottenManager extends Mitarbeiter {
 
@@ -10,9 +9,10 @@ public class FlottenManager extends Mitarbeiter {
         super(id, name, vorname, email, anschrift);
     }
 
-    // Gibt alle registrierten Scooter zurück
+    /**
+     * Gibt alle registrierten Scooter zurück.
+     */
     public List<EScooter> alleScooterAnzeigen() {
         return EScooterRegistry.getAll();
     }
 }
-

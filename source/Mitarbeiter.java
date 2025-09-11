@@ -5,6 +5,9 @@ public abstract class Mitarbeiter {
     private String email;
     private Anschrift anschrift;
 
+    /**
+     * Legt einen neuen Mitarbeiter an.
+     */
     public Mitarbeiter(String id, String name, String vorname, String email, Anschrift anschrift) {
         this.id = id;
         this.name = name;
